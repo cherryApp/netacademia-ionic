@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Tabs } from 'ionic-angular/navigation/nav-interfaces';
+import { NavOptions } from 'ionic-angular/navigation/nav-util';
 
 /**
  * Generated class for the TicketPage page.
@@ -20,6 +22,15 @@ export class TicketPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketPage');
+  }
+
+  clickOnBackButton(tabIndex) {
+    let options: NavOptions = {
+      updateUrl: true,
+      animate: true,
+      animation: "md-transition"
+    };
+    (this.navCtrl.parent as Tabs).select(tabIndex, options, false);
   }
 
 }

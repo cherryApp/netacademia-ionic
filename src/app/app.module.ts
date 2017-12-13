@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TicketPage } from '../pages/ticket/ticket';
+import { SellTicketPage } from '../pages/sell-ticket/sell-ticket';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TicketPage } from '../pages/ticket/ticket';
     ContactPage,
     HomePage,
     TabsPage,
-    TicketPage
+    TicketPage,
+    SellTicketPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { TicketPage } from '../pages/ticket/ticket';
     ContactPage,
     HomePage,
     TabsPage,
-    TicketPage
+    TicketPage,
+    SellTicketPage
   ],
   providers: [
     StatusBar,
