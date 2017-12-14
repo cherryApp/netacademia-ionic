@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPageModule } from './login.module';
+import { loginDataModel } from '../../shared/loginDataModel';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginPage {
 
-  loginData: {email: any, password: any} = {
+  loginData: loginDataModel = {
     email: "",
     password: ""
   };
@@ -18,8 +19,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public userService: UserServiceProvider,
-    public afAuth: AngularFireAuth) {
+    public userService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -27,7 +27,7 @@ export class LoginPage {
   }
 
   login() {
-    console.log(this.loginData);
+    this.userService.login(this.loginData);
   }
 
 }

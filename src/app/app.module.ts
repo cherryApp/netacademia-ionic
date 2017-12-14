@@ -22,8 +22,8 @@ import { AngularFireModule } from 'angularfire2';
 
 export const firebaseConfig = {
   baseUrl: 'https://jegybazar-27302.firebaseio.com',
-  registrationUrl: ' https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser',
-  loginUrl: ' https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
+  registrationUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser',
+  loginUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
   apiKey: 'AIzaSyALPBS-gllA6F-vRya-6pYZXABheOWFYlw',
   authDomain: 'jegybazar-27302.firebaseapp.com',
   databaseURL: 'https://jegybazar-27302.firebaseio.com',

@@ -1,17 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { loginDataModel } from '../../shared/loginDataModel';
 
-/*
-  Generated class for the UserServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserServiceProvider {
 
-  constructor() {
-    console.log('Hello UserServiceProvider Provider');
+  constructor(public afAuth: AngularFireAuth) {}
+
+  login(model: loginDataModel) {
+    this.afAuth.auth.signInWithEmailAndPassword(
+      model.email,
+      model.password
+    ).then( firebaseResponse => {
+      console.dir(firebaseResponse);
+    }).catch( firebaseError => {
+      console.error(firebaseError);
+    });
   }
 
 }
