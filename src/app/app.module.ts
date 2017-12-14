@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -13,6 +14,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TicketPage } from '../pages/ticket/ticket';
 import { SellTicketPage } from '../pages/sell-ticket/sell-ticket';
 import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { FirebaseApp } from 'angularfire2/firebase.app.module';
+import { UserServiceProvider } from '../providers/user-service/user-service';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,7 @@ import { LoginPage } from '../pages/login/login';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -43,7 +50,12 @@ import { LoginPage } from '../pages/login/login';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AngularFireAuth,
+    AngularFireDatabase,
+    FirebaseApp,
+    UserServiceProvider,
+    HttpClient
   ]
 })
 export class AppModule {}
