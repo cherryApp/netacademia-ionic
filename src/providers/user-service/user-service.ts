@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { loginDataModel } from '../../shared/loginDataModel';
+import { UserInfo } from 'firebase/app';
+import { UserModel } from '../../shared/user-model';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(public afAuth: AngularFireAuth) {}
+  isLogin: boolean = false;
+  currentUser: loginDataModel = new loginDataModel();
+  loginSubject: Subject<any> = new Subject();
 
-  login(model: loginDataModel) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    public afDb: AngularFireDatabase) {}
+
+  login(param: loginDataModel) {
     this.afAuth.auth.signInWithEmailAndPassword(
-      model.email,
-      model.password
-    ).then( firebaseResponse => {
-      console.dir(firebaseResponse);
+      param.email,
+      param.password
+    ).then( (user: UserInfo) => {
+      this.isLogin = true;
+      this.currentUser = new loginDataModel(user);
+      this.loginSubject.next(this.currentUser);
     }).catch( firebaseError => {
       console.error(firebaseError);
     });
