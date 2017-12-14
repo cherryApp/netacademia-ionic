@@ -14,11 +14,24 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TicketPage } from '../pages/ticket/ticket';
 import { SellTicketPage } from '../pages/sell-ticket/sell-ticket';
 import { LoginPage } from '../pages/login/login';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { FirebaseApp } from 'angularfire2/firebase.app.module';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+  baseUrl: 'https://jegybazar-27302.firebaseio.com',
+  registrationUrl: ' https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser',
+  loginUrl: ' https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
+  apiKey: 'AIzaSyALPBS-gllA6F-vRya-6pYZXABheOWFYlw',
+  authDomain: 'jegybazar-27302.firebaseapp.com',
+  databaseURL: 'https://jegybazar-27302.firebaseio.com',
+  projectId: 'jegybazar-27302',
+  storageBucket: 'jegybazar-27302.appspot.com',
+  messagingSenderId: '873164960496'
+};
 
 @NgModule({
   declarations: [
@@ -34,7 +47,10 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

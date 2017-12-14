@@ -16,15 +16,15 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-input type="text" placeholder="Email"></ion-input>
+      <ion-input [(ngModel)]="loginData.email" type="text" placeholder="Email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="password" placeholder="Jelszó"></ion-input>
+      <ion-input [(ngModel)]="loginData.password" type="password" placeholder="Jelszó"></ion-input>
     </ion-item>
 
     <ion-item>
-      <button ion-button block large>BELÉPÉS</button>
+      <button ion-button block large (click)="login()">BELÉPÉS</button>
     </ion-item>
   </ion-list>
 </ion-content>
