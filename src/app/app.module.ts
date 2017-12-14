@@ -14,9 +14,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TicketPage } from '../pages/ticket/ticket';
 import { SellTicketPage } from '../pages/sell-ticket/sell-ticket';
 import { LoginPage } from '../pages/login/login';
-import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
-import { FirebaseApp } from 'angularfire2/firebase.app.module';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
@@ -67,9 +66,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth,
     AngularFireDatabase,
-    FirebaseApp,
     UserServiceProvider,
     HttpClient
   ]
