@@ -16,11 +16,22 @@
 <ion-content padding>
     <ion-list>
       <ion-item *ngFor="let inputItem of eventKeyList">
-        <ion-label fixed>{{ inputItem }}</ion-label>
-        <ion-input type="text" value=""></ion-input>
+        <ion-label fixed>{{ inputItem.label }}</ion-label>
+        <ion-input
+          *ngIf="inputItem.key != 'date'"
+          [(ngModel)]="newEventModel[inputItem.key]"
+          type="text">
+        </ion-input>
+        <ion-datetime
+          *ngIf="inputItem.key == 'date'"
+          [(ngModel)]="newEventModel[inputItem.key]"
+          displayFormat="YYYY-MM-DD HH:mm"
+          pickerFormat="YYYY MM DD HH mm">
+        </ion-datetime>
       </ion-item>
       <ion-item>
-        <button ion-button block large color="primary">mentés</button>
+        <button ion-button block large color="primary"
+          (click)="saveNewEvent()">mentés</button>
       </ion-item>
     </ion-list>
 

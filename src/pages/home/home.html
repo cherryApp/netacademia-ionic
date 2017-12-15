@@ -22,5 +22,15 @@
         {{ eventCard.description }}
       </p>
     </ion-card-content>
+    <ion-row no-padding>
+        <ion-col>
+          <button class="event-edit-button" ion-button clear small icon-start
+            (click)="updateEvent(eventCard)">
+            <ion-icon name='create'></ion-icon>
+            szerkesztés
+          </button>
+        </ion-col>
+    </ion-row>
+    <!-- https://www.blackhat.com/images/page-graphics/metatag/event-logo-us17.png -->
   </ion-card>
 </ion-content>

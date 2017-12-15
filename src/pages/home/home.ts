@@ -32,4 +32,10 @@ export class HomePage implements OnInit{
     this.navCtrl.push(EventManagerPage);
   }
 
+  updateEvent(cardEvent) {
+    this.navCtrl.push(EventManagerPage, {
+      baseEvent: cardEvent
+    });
+  }
+
 }
