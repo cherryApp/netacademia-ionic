@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { loginDataModel } from '../../shared/loginDataModel';
 import { UserInfo } from 'firebase/app';
-import { UserModel } from '../../shared/user-model';
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -14,17 +12,26 @@ export class UserServiceProvider {
   loginSubject: Subject<any> = new Subject();
 
   constructor(
-    public afAuth: AngularFireAuth,
-    public afDb: AngularFireDatabase) {}
+    public afAuth: AngularFireAuth) {
+      if (localStorage.loggedInUser) {
+        this.currentUser = JSON.parse(localStorage.loggedInUser);
+        this.setLoggedInState();
+      }
+    }
+
+  setLoggedInState() {
+    this.isLogin = true;
+    this.currentUser = new loginDataModel(this.currentUser);
+    this.loginSubject.next(this.currentUser);
+  }
 
   login(param: loginDataModel) {
     this.afAuth.auth.signInWithEmailAndPassword(
       param.email,
       param.password
     ).then( (user: UserInfo) => {
-      this.isLogin = true;
-      this.currentUser = new loginDataModel(user);
-      this.loginSubject.next(this.currentUser);
+      localStorage.loggedInUser = JSON.stringify(user);
+      this.setLoggedInState();
     }).catch( firebaseError => {
       console.error(firebaseError);
     });

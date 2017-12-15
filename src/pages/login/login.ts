@@ -4,6 +4,7 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { LoginPageModule } from './login.module';
 import { loginDataModel } from '../../shared/loginDataModel';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -24,12 +25,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.userService.isLogin) {
+      this.navCtrl.setRoot(TabsPage);
+    }
+
     this.userService.loginSubject.subscribe(
       user => {
         console.log("User logged in...");
-
+        this.navCtrl.setRoot(TabsPage);
       }
-    )
+    );
   }
 
   ionViewDidLoad() {
