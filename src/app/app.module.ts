@@ -19,6 +19,7 @@ import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/dat
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
+import { EventServiceProvider } from '../providers/event-service/event-service';
 
 export const firebaseConfig = {
   baseUrl: 'https://jegybazar-27302.firebaseio.com',
@@ -68,7 +69,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireDatabase,
     UserServiceProvider,
-    HttpClient
+    HttpClient,
+    EventServiceProvider
   ]
 })
 export class AppModule {}

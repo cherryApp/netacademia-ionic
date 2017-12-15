@@ -1,12 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Jegybazár</ion-title>
+    <ion-title>Események</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Üdv a Jegybazárban!</h2>
-  <p>
-    Ez a legjobb hely ha lazulni akarsz valahol
-  </p>
+  <ion-card *ngFor="let eventCard of eventList">
+    <img [src]="eventCard.pictureURL"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{ eventCard.name }}
+        </ion-card-title>
+      <p>
+        {{ eventCard.description }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
