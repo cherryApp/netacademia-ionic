@@ -20,6 +20,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { EventServiceProvider } from '../providers/event-service/event-service';
+import { EventManagerPage } from '../pages/event-manager/event-manager';
 
 export const firebaseConfig = {
   baseUrl: 'https://jegybazar-27302.firebaseio.com',
@@ -42,7 +43,8 @@ export const firebaseConfig = {
     TabsPage,
     TicketPage,
     SellTicketPage,
-    LoginPage
+    LoginPage,
+    EventManagerPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ export const firebaseConfig = {
     TabsPage,
     TicketPage,
     SellTicketPage,
-    LoginPage
+    LoginPage,
+    EventManagerPage
   ],
   providers: [
     StatusBar,

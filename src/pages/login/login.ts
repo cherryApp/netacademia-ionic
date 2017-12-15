@@ -25,20 +25,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("login init");
     if (this.userService.isLogin) {
       this.navCtrl.setRoot(TabsPage);
     }
 
     this.userService.loginSubject.subscribe(
       user => {
-        console.log("User logged in...");
         this.navCtrl.setRoot(TabsPage);
       }
     );
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad');
   }
 
   login() {

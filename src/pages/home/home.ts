@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { EventModel } from '../../shared/event-model';
+import { EventManagerPage } from '../event-manager/event-manager';
 
 @Component({
   selector: 'page-home',
@@ -25,6 +26,10 @@ export class HomePage implements OnInit{
         console.log(this.eventList);
       }
     )
+  }
+
+  openEventManager() {
+    this.navCtrl.push(EventManagerPage);
   }
 
 }

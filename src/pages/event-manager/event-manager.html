@@ -1,0 +1,28 @@
+<!--
+  Generated template for the EventManagerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Új esemény</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item *ngFor="let inputItem of eventKeyList">
+        <ion-label fixed>{{ inputItem }}</ion-label>
+        <ion-input type="text" value=""></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button block large color="primary">mentés</button>
+      </ion-item>
+    </ion-list>
+
+
+</ion-content>

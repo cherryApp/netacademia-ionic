@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content padding>
+
+  <div class="event-fab-container">
+    <button ion-fab color="danger" (click)="openEventManager()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </div>
+
   <ion-card *ngFor="let eventCard of eventList">
     <img [src]="eventCard.pictureURL"/>
     <ion-card-content>
