@@ -14,8 +14,8 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage implements OnInit {
 
   loginData: loginDataModel = {
-    email: "",
-    password: ""
+    email: "nagy.gergo@3pixel.hu",
+    password: "Puffer1234"
   };
 
   constructor(

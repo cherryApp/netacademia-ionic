@@ -30,10 +30,13 @@
         </ion-datetime>
       </ion-item>
       <ion-item>
+        <label for="native-file-chooser" class="file-input-label"
+        ion-button block large color="secondary">kép választása</label>
+        <input id="native-file-chooser" type="file" (change)="fileChoosed(this)">
+      </ion-item>
+      <ion-item>
         <button ion-button block large color="primary"
           (click)="saveNewEvent()">{{ buttonLabel }}</button>
       </ion-item>
     </ion-list>
-
-
 </ion-content>
