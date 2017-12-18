@@ -16,6 +16,7 @@ export class EventServiceProvider {
   save(param: EventModel) {
     if (param.$id) {
       // update
+      param.id = param.$id;
       return fromPromise(this.afDb.object(`events/${param.$id}`).update(param));
     } else {
       // create

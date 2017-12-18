@@ -1,7 +1,8 @@
 import { Component, Output } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { EventModel } from '../../shared/event-model';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -10,34 +11,56 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 })
 export class EventManagerPage {
 
-  @Output() newEventModel: EventModel = new EventModel();
+  newEventModel: EventModel = new EventModel();
+  isNewEvent: boolean = true;
+  buttonLabel: string;
   eventKeyList: object[] = [
     {key: 'name', label: "Név"},
     {key: 'date', label: "Dátum"},
-    {key: 'pictureUrl', label: "Kép"},
+    {key: 'pictureURL', label: "Kép"},
     {key: 'description', label: "Leírás"}
   ];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public eventService: EventServiceProvider) {
-      console.log(this.navParams.data.baseEvent);
-      this.newEventModel = {
-        $id: this.navParams.data.baseEvent.$key,
-        name: this.navParams.data.baseEvent.name,
-        pictureURL: this.navParams.data.baseEvent.pictureURL,
-        date: this.navParams.data.baseEvent.date,
-        description: this.navParams.data.baseEvent.description,
-        tickets: this.navParams.data.baseEvent.tickets
-      };
+    public eventService: EventServiceProvider,
+    public toastCtrl: ToastController) {
+      this.buttonLabel = "létrehozás";
+      if (this.navParams.data.baseEvent) {
+        this.isNewEvent = false;
+        this.buttonLabel = "frissítés";
+        this.newEventModel = new EventModel(
+          this.navParams.data.baseEvent
+        );
+        this.newEventModel.date = moment(this.newEventModel.date).toISOString();
+      }
   }
 
   saveNewEvent() {
+    let message = this.isNewEvent ? "Esemény létrehozva" : "Esemény frissítve";
     this.eventService.save(this.newEventModel)
       .forEach( response => {
-        console.log(response);
+        this.presentToast(message, () => {
+          this.navCtrl.pop();
+        });
       });
+  }
+
+  presentToast(message: string, callBack: any = null, position: string = 'top') {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: position
+    });
+
+    toast.onDidDismiss(() => {
+      if (callBack) {
+        callBack();
+      }
+    });
+
+    toast.present();
   }
 
 }

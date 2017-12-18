@@ -1,4 +1,5 @@
 export class EventModel {
+  id?: string;
   $id: string;
   name: string;
   date: string; // na ezt azert prodban ezt szebben kene :)
@@ -13,6 +14,10 @@ export class EventModel {
 
       if (!this.$id) {
         this.$id = param.$key;
+      }
+
+      if (!this.tickets) {
+        this.tickets = {};
       }
 
       const $idPropertyDescriptior = Object.getOwnPropertyDescriptor(this, '$id');
