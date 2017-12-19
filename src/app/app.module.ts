@@ -21,6 +21,9 @@ import { HttpClient } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { EventServiceProvider } from '../providers/event-service/event-service';
 import { EventManagerPage } from '../pages/event-manager/event-manager';
+import { TicketServiceProvider } from '../providers/ticket-service/ticket-service';
+import { PipesModule } from '../pipes/pipes.module';
+
 
 export const firebaseConfig = {
   baseUrl: 'https://jegybazar-27302.firebaseio.com',
@@ -52,7 +55,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -73,7 +77,8 @@ export const firebaseConfig = {
     AngularFireDatabase,
     UserServiceProvider,
     HttpClient,
-    EventServiceProvider
+    EventServiceProvider,
+    TicketServiceProvider
   ]
 })
 export class AppModule {}

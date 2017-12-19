@@ -19,5 +19,16 @@
 
 
 <ion-content padding>
-
+    <ion-list>
+      <ion-item *ngFor="let ticket of ticketList">
+        <ion-thumbnail item-start>
+          <img class="eventPicture" [src]="getPicture(ticket.eventId)">
+        </ion-thumbnail>
+        <h2>Esemény neve</h2>
+        <p>{{ ticket.currentBid }}Ft, {{ ticket.bidEndDate | showDate }}</p>
+        <button ion-button clear item-end large>
+            <ion-icon name="arrow-round-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
 </ion-content>
