@@ -20,11 +20,17 @@
 
 <ion-content padding>
     <ion-list>
-      <ion-item *ngFor="let ticket of ticketList">
+      <ion-item>
+        <ion-searchbar
+          [(ngModel)]="searchPhrase"
+          [showCancelButton]="shouldShowCancel">
+        </ion-searchbar>
+      </ion-item>
+      <ion-item *ngFor="let ticket of ticketList | ticketSearch:searchPhrase">
         <ion-thumbnail item-start>
           <img class="eventPicture" [src]="getPicture(ticket.eventId)">
         </ion-thumbnail>
-        <h2>Esemény neve</h2>
+        <h2>{{ ticket.details }}</h2>
         <p>{{ ticket.currentBid }}Ft, {{ ticket.bidEndDate | showDate }}</p>
         <button ion-button clear item-end large>
             <ion-icon name="arrow-round-forward"></ion-icon>

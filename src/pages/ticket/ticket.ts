@@ -23,6 +23,8 @@ export class TicketPage implements OnInit {
 
   ticketList: TicketModel[] = [];
   pictures: object = {};
+  searchPhrase: string = "";
+  shouldShowCancel: boolean = true;
 
   constructor(
     public navCtrl: NavController,
