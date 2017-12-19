@@ -4,6 +4,8 @@ import { EventModel } from '../../shared/event-model';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import * as moment from 'moment';
 import * as firebase from 'firebase';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { Loading } from 'ionic-angular/components/loading/loading';
 
 @IonicPage()
 @Component({
@@ -28,7 +30,8 @@ export class EventManagerPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public eventService: EventServiceProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController) {
       this.storage = firebase.storage().ref();
       this.buttonLabel = "létrehozás";
       if (this.navParams.data.baseEvent) {
@@ -72,8 +75,13 @@ export class EventManagerPage {
    * @param event
    */
   fileChoosed(event) {
+    let loading: Loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: 'Kérem várjon, amíg a kép feltöltése befejeződik'
+    });
     let file = event.currentTarget.files[0];
     var reader  = new window['FileReader']();
+
 
     reader.onloadend = () => {
       // Set store url.
@@ -83,14 +91,16 @@ export class EventManagerPage {
       storageRef.put(file)
         .then( snapshot => {
           this.newEventModel.pictureURL = snapshot.downloadURL;
+          loading.dismiss();
         })
         .catch( error => {
           console.error(error);
+          loading.dismiss();
         });
-      // this.newEventModel.pictureURL = reader.result;
     };
 
     if (file) {
+      loading.present();
       reader.readAsDataURL(file);
     }
     // http://www.fortitudemagazine.co.uk/wp-content/uploads/2017/04/sziget_og_image.jpg
