@@ -11,7 +11,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FileChooser } from '@ionic-native/file-chooser';
 import { TicketPage } from '../pages/ticket/ticket';
 import { SellTicketPage } from '../pages/sell-ticket/sell-ticket';
 import { LoginPage } from '../pages/login/login';
@@ -74,8 +73,7 @@ export const firebaseConfig = {
     AngularFireDatabase,
     UserServiceProvider,
     HttpClient,
-    EventServiceProvider,
-    FileChooser
+    EventServiceProvider
   ]
 })
 export class AppModule {}

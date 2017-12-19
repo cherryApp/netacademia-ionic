@@ -1,10 +1,9 @@
-import { Component, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { EventModel } from '../../shared/event-model';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import * as moment from 'moment';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { ElementRef } from '@angular/core/src/linker/element_ref';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -17,6 +16,7 @@ export class EventManagerPage {
   isNewEvent: boolean = true;
   buttonLabel: string;
   choosedFile: any;
+  storage: any;
   eventKeyList: object[] = [
     {key: 'name', label: "Név"},
     {key: 'date', label: "Dátum"},
@@ -28,8 +28,8 @@ export class EventManagerPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public eventService: EventServiceProvider,
-    public toastCtrl: ToastController,
-    public fileChooser: FileChooser) {
+    public toastCtrl: ToastController) {
+      this.storage = firebase.storage().ref();
       this.buttonLabel = "létrehozás";
       if (this.navParams.data.baseEvent) {
         this.isNewEvent = false;
@@ -67,16 +67,28 @@ export class EventManagerPage {
     toast.present();
   }
 
-  fileChoosed() {
-    let chooser = document.querySelector("#native-file-chooser");
-    let file = chooser.files[0];
-    alert(file);
-    var reader  = new FileReader();
+  /**
+   * Documentation: https://firebase.google.com/docs/storage/web/upload-files
+   * @param event
+   */
+  fileChoosed(event) {
+    let file = event.currentTarget.files[0];
+    var reader  = new window['FileReader']();
 
-    reader.addEventListener("load", () => {
-      console.log(reader.result);
-      this.newEventModel.pictureURL = reader.result;
-    }, false);
+    reader.onloadend = () => {
+      // Set store url.
+      let storageRef = this.storage.child(`images/events/${file.name}`);
+
+      // Upload file content.
+      storageRef.put(file)
+        .then( snapshot => {
+          this.newEventModel.pictureURL = snapshot.downloadURL;
+        })
+        .catch( error => {
+          console.error(error);
+        });
+      // this.newEventModel.pictureURL = reader.result;
+    };
 
     if (file) {
       reader.readAsDataURL(file);
